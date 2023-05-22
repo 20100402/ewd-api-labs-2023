@@ -38,7 +38,7 @@ export default (dependencies) => {
     return {
         createAccount,
         getAccount,
-        listAccounts,
-        updateAccount
+        updateAccount,
+        listAccounts
     };
 };
