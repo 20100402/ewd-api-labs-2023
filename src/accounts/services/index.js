@@ -33,7 +33,12 @@ export default {
     },
     addFavourite: async (accountId, movieId, { accountsRepository }) => {
         const account = await accountsRepository.get(accountId);
-        account.favourites.push(movieId);
+        if (!account.favourites.includes(movieId)) {
+            account.favourites.push(movieId);
+        }
+        else {
+            throw new Error('The movie is already added to the favourites list');
+        }
         return await accountsRepository.merge(account);
     }
 
