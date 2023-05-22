@@ -1,7 +1,8 @@
 import Account from '../entities/Account';
 
 export default {
-    registerAccount: async (firstName, lastName, email, password, { accountsRepository }) => {
+    registerAccount: async (firstName, lastName, email, password, { accountsRepository, authenticator }) => {
+        password = await authenticator.encrypt(password);
         const account = new Account(undefined, firstName, lastName, email, password);
         return accountsRepository.persist(account);
     },
@@ -14,17 +15,18 @@ export default {
     findByEmail: (email, { accountsRepository }) => {
         return accountsRepository.getByEmail(email);
     },
-    updateAccount: async (id, firstName, lastName, email, password, { accountsRepository }) => {
+    updateAccount: async (id, firstName, lastName, email, password, { accountsRepository, authenticator }) => {
+        password = await authenticator.encrypt(password);
         const accountUpdated = new Account(id, firstName, lastName, email, password);
         return accountsRepository.merge(accountUpdated);
     },
-    authenticate: async (email, password, { accountsRepository, authenticator }) => {
+    authenticate: async (email, password, { accountsRepository, authenticator, tokenManager }) => {
         const account = await accountsRepository.getByEmail(email);
         const result = await authenticator.compare(password, account.password);
         if (!result) {
             throw new Error('Bad credentials');
         }
-        const token = JSON.stringify({ email: account.email });//JUST Temporary!!! TODO: make it better
+        const token = tokenManager.generate({ email: account.email });
         return token;
     },
     getFavourites: async (accountId, { accountsRepository }) => {
@@ -40,6 +42,14 @@ export default {
             throw new Error('The movie is already added to the favourites list');
         }
         return await accountsRepository.merge(account);
+    },
+    verifyToken: async (token, { accountsRepository, tokenManager }) => {
+        const decoded = await tokenManager.decode(token);
+        const user = await accountsRepository.getByEmail(decoded.email);
+        if (!user) {
+            throw new Error('Bad token');
+        }
+        return user.email;
     }
 
 };
