@@ -8,7 +8,6 @@ export default (dependencies) => {
         // Treatment
         const movie = await moviesService.getMovie(movieId, dependencies);
         //output
-        console.log(movie)
         response.status(200).json(movie);
     };
     const find = async (request, response, next) => {

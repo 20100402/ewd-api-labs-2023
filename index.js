@@ -5,6 +5,7 @@ import createAccountsRouter from './src/accounts/routes';
 import buildDependencies from "./src/config/dependencies";
 import createMoviesRouter from './src/movies/routes';
 import db from './src/config/db';
+import { swaggerDocSetup } from './swagger';
 import errorHandler from './src/utils/ErrorHandler';
 
 dotenv.config();
@@ -16,6 +17,8 @@ const app = express();
 const port = process.env.PORT;
 
 const dependencies = buildDependencies();
+
+swaggerDocSetup(app);
 
 app.use(express.json());
 

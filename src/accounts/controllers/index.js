@@ -64,7 +64,7 @@ export default (dependencies) => {
     const verify = async (request, response, next) => {
         try {
             // Input
-            const authHeader = request.headers.authorization;
+            const authHeader = request.headers.token;
 
             // Treatment
 
@@ -79,6 +79,17 @@ export default (dependencies) => {
         }
     };
 
+    const getId = async (request, response, next) => {
+        try {
+            const authHeader = request.headers.token;
+            const accessToken = authHeader.split(" ")[1];
+            const id = await accountService.verifyReturnId(accessToken, dependencies);
+            response.status(200).json(id);
+        } catch (err) {
+            next(new Error(`Verification Failed ${err.message}`));
+        }
+    };
+
 
 
     return {
@@ -89,7 +100,8 @@ export default (dependencies) => {
         authenticateAccount,
         addFavourite,
         getFavourites,
-        verify
+        verify,
+        getId
 
     };
 };
