@@ -11,4 +11,4 @@ const createGenresRouter = (dependencies) => {
 
     return router;
 };
-export default createMoviesRouter;
+export default createGenresRouter;
