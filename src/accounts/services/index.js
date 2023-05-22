@@ -13,5 +13,9 @@ export default {
     },
     findByEmail: (email, { accountsRepository }) => {
         return accountsRepository.getByEmail(email);
-    }
+    },
+    updateAccount: async (id, firstName, lastName, email, password, { accountsRepository }) => {
+        const accountUpdated = new Account(id, firstName, lastName, email, password);
+        return accountsRepository.merge(accountUpdated);
+    },
 };
