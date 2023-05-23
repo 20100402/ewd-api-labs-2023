@@ -9,20 +9,17 @@ const createMoviesRouter = (dependencies) => {
     const accountsController = AccountsController(dependencies);
 
 
-    router.route('/:id')
-        .get(accountsController.verify, moviesController.getMovie);
 
-    router.route('/')
-        .get(moviesController.find);
 
-    router.route('/upcoming')
-        .get(moviesController.getUpcomingMovies);
+    router.get('/', moviesController.find);
 
-    router.route('/topRated')
-        .get(moviesController.getTopRatedMovies);
+    router.get('/upcoming', moviesController.getUpcoming);
 
-    router.route('/popular')
-        .get(moviesController.getPopularMovies);
+    router.get('/topRated', moviesController.getTopRated);
+
+    router.get('/popular', moviesController.getPopular);
+
+    router.get('/:id', accountsController.verify, moviesController.getMovie);
 
     return router;
 };

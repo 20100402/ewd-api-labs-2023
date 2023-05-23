@@ -10,6 +10,31 @@ export default (dependencies) => {
         //output
         response.status(200).json(movie);
     };
+    const getUpcoming = async (request, response, next) => {
+        //input
+        const query = request.query;
+        // Treatment
+        console.log(query);
+        const upcomingmovies = await moviesService.find(query, dependencies);
+        // output
+        response.status(200).json(upcomingmovies);
+    };
+    const getTopRated = async (request, response, next) => {
+        //input
+        const page = request.query.page;
+        // Treatment
+        const movies = await moviesService.getTopRated(page, dependencies);
+        // output
+        response.status(200).json(movies);
+    };
+    const getPopular = async (request, response, next) => {
+        //input
+        const page = request.query.page;
+        // Treatment
+        const movies = await moviesService.getPopular(page, dependencies);
+        // output
+        response.status(200).json(movies);
+    };
     const find = async (request, response, next) => {
         //input
         const query = request.query;
@@ -18,36 +43,12 @@ export default (dependencies) => {
         //output
         response.status(200).json(movies);
     };
-    const getUpcomingMovies = async (request, response, next) => {
-        //input
-        const query = request.query;
-        // Treatment
-        const movies = await moviesService.findUpcoming(query, dependencies);
-        // output
-        response.status(200).json(movies);
-    };
-    const getTopRatedMovies = async (request, response, next) => {
-        //input
-        const page = request.query.page;
-        // Treatment
-        const movies = await moviesService.findTopRated(page, dependencies);
-        // output
-        response.status(200).json(movies);
-    };
-    const getPopularMovies = async (request, response, next) => {
-        //input
-        const page = request.query.page;
-        // Treatment
-        const movies = await moviesService.findPopular(page, dependencies);
-        // output
-        response.status(200).json(movies);
-    };
 
     return {
         getMovie,
+        getUpcoming,
+        getTopRated,
+        getPopular,
         find,
-        getUpcomingMovies,
-        getTopRatedMovies,
-        getPopularMovies
     };
 };
