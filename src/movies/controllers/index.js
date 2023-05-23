@@ -20,9 +20,25 @@ export default (dependencies) => {
     };
     const getUpcomingMovies = async (request, response, next) => {
         //input
+        const query = request.query;
+        // Treatment
+        const movies = await moviesService.findUpcoming(query, dependencies);
+        // output
+        response.status(200).json(movies);
+    };
+    const getTopRatedMovies = async (request, response, next) => {
+        //input
         const page = request.query.page;
         // Treatment
-        const movies = await moviesService.findUpcoming(page, dependencies);
+        const movies = await moviesService.findTopRated(page, dependencies);
+        // output
+        response.status(200).json(movies);
+    };
+    const getPopularMovies = async (request, response, next) => {
+        //input
+        const page = request.query.page;
+        // Treatment
+        const movies = await moviesService.findPopular(page, dependencies);
         // output
         response.status(200).json(movies);
     };
@@ -30,6 +46,8 @@ export default (dependencies) => {
     return {
         getMovie,
         find,
-        getUpcomingMovies
+        getUpcomingMovies,
+        getTopRatedMovies,
+        getPopularMovies
     };
 };

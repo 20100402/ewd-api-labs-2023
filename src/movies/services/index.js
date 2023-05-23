@@ -13,9 +13,21 @@ export default {
         );
         return response.data;
     },
-    findUpcoming: async (page) => {
+    findUpcoming: async (query) => {
         const response = await axios.get(
-            `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}`
+            `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.TMDB_KEY}&language=en-US&include_adult=false&include_video=false&${query}`
+        );
+        return response.data;
+    },
+    findTopRated: async (page) => {
+        const response = await axios.get(
+            `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}`
+        );
+        return response.data;
+    },
+    findPopular: async (page) => {
+        const response = await axios.get(
+            `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}`
         );
         return response.data;
     },

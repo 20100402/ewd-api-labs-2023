@@ -1,11 +1,11 @@
 import express from 'express';
-import servicesController from '../controller'
+import ReviewController from '../controller'
 
 
-const createReviewRouter = (dependencies) => {
+const createReviewsRouter = (dependencies) => {
     const router = express.Router();
     // load controllers with dependencies
-    const controller = servicesController(dependencies);
+    const reviewController = ReviewController(dependencies);
 
 
 
@@ -38,8 +38,8 @@ const createReviewRouter = (dependencies) => {
      *                     type: string
      */
     router.route('/:id')
-        .get(controller.getMovieReviews);
+        .get(reviewController.getMovieReviews);
 
     return router;
 };
-export default createReviewRouter;
+export default createReviewsRouter;

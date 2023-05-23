@@ -18,6 +18,12 @@ const createMoviesRouter = (dependencies) => {
     router.route('/upcoming')
         .get(moviesController.getUpcomingMovies);
 
+    router.route('/topRated')
+        .get(moviesController.getTopRatedMovies);
+
+    router.route('/popular')
+        .get(moviesController.getPopularMovies);
+
     return router;
 };
 export default createMoviesRouter;
