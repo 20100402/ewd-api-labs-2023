@@ -43,6 +43,7 @@ http://localhost:3000/api-docs
 Tested via postman
 
 
+![Screenshot 2023-05-23 at 4 14 28 AM](https://github.com/20100402/ewd-api-labs-2023/assets/113951387/702a5acb-b21a-498d-87b6-1a7d830b1d5f)
 
 
 ## Integrated with React App
