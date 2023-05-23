@@ -24,9 +24,36 @@ swaggerDocSetup(app);
 
 app.use(express.json());
 
+/**
+ * @swagger
+ * tags:
+ *   name: Movies
+ *   description: Movie API endpoints
+ */
 app.use('/api/movies', createMoviesRouter(dependencies));
+
+/**
+ * @swagger
+ * tags:
+ *   name: Genres
+ *   description: Genre API endpoints
+ */
 app.use('/api/genres', createGenresRouter(dependencies));
+
+/**
+ * @swagger
+ * tags:
+ *   name: Reviews
+ *   description: Review API endpoints
+ */
 app.use('/api/reviews', createReviewsRouter(dependencies));
+
+/**
+ * @swagger
+ * tags:
+ *   name: Accounts
+ *   description: Account API endpoints
+ */
 app.use('/api/accounts', createAccountsRouter(dependencies));
 
 app.use(errorHandler);

@@ -13,18 +13,18 @@ const createReviewsRouter = (dependencies) => {
      * @swagger
      * /api/reviews/{id}:
      *   get:
-     *     summary: Get movie reviews by ID
+     *     summary: Get reviews by movie ID
      *     tags: [Reviews]
      *     parameters:
      *       - in: path
      *         name: id
      *         required: true
-     *         description: ID of the movie
+     *         description: movie Id
      *         schema:
      *           type: integer
      *     responses:
      *       200:
-     *         description: List of movie reviews
+     *         description: List of reviews for the movie Id
      *         content:
      *           application/json:
      *             schema:

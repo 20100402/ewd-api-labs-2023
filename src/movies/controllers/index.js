@@ -15,7 +15,7 @@ export default (dependencies) => {
         const query = request.query;
         // Treatment
         console.log(query);
-        const upcomingmovies = await moviesService.find(query, dependencies);
+        const upcomingmovies = await moviesService.getUpcoming(query, dependencies);
         // output
         response.status(200).json(upcomingmovies);
     };
